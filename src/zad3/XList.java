@@ -90,27 +90,29 @@ public class XList<T> extends ArrayList<T>{
 
     public<S>XList<S> collect(Function<T,S> func){
         List<S> myList = new ArrayList<>();
-        for(int i=0;i<this.size();i++){
-            myList.add(func.apply(this.get(i)));
+        for (S s : myList) {
+            myList.add(func.apply((T) s));
         }
+
         return new XList<>(myList);
     }
 
     public String join(){
         StringBuilder sb = new StringBuilder();
-        for(T t : this){
-            sb.append(t.toString());
+        for(int i=0;i<this.size();i++){
+            sb.append(this.get(i) + " ");
         }
         return sb.toString();
     }
 
-    public String join(String string) {
-        StringBuilder sB = new StringBuilder();
-        for (T t : this) {
-            sB.append(t.toString() + string);
+    public String join(String s){
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<this.size();i++){
+            sb.append(this.get(i) + s);
         }
-        return sB.toString();
+        return sb.toString();
     }
+
 
 
 
@@ -152,7 +154,7 @@ public class XList<T> extends ArrayList<T>{
         System.out.println("TEST: ");
         System.out.println(testt);*/
 
-        return null;
+        return this;
     }
 
 /*

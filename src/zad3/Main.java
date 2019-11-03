@@ -80,8 +80,8 @@ public class Main {
     // collect i join
     XList<String> j1 = cres.collect( list -> list.join());
     System.out.println(j1.join(" "));
-    XList<String> j2 =toCombine.collect( list -> list.join("-"));
-    System.out.println(j2.join(" "));
+    //XList<String> j2 =toCombine.collect( list -> list.join("-"));
+    //System.out.println(j2.join(" "));
 
 /*    // forEachWithIndex
     XList<Integer> lmod = XList.of(1,2,8, 10, 11, 30, 3, 4);  
