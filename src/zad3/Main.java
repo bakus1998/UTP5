@@ -61,6 +61,7 @@ public class Main {
     // Widzieliśmy metode union
     // Teraz metoda diff(dowolna kolekcja)
     System.out.println(m3.diff(set));  // wszystko z m3, co nie jest w set
+
     System.out.println(XList.of(set).diff(m3)); // co jest w set, czego nie ma w m3
 
     // Metoda unique -zwraca nową Xlist bez duplikatow
@@ -68,7 +69,6 @@ public class Main {
     System.out.println(uniq);
 
     // kombinacje (kolejność jest istotna)
-
     List<String> sa = Arrays.asList( "a", "b");
     List<String> sb = Arrays.asList( "X", "Y", "Z" );
     XList<String> sc = XList.charsOf( "12" );
@@ -80,18 +80,17 @@ public class Main {
     // collect i join
     XList<String> j1 = cres.collect( list -> list.join());
     System.out.println(j1.join(" "));
-    //XList<String> j2 =toCombine.collect( list -> list.join("-"));
-    //System.out.println(j2.join(" "));
+    XList<String> j2 =cres.collect( list -> list.join("-"));
+    System.out.println(j2.join(" "));
 
-/*    // forEachWithIndex
-    XList<Integer> lmod = XList.of(1,2,8, 10, 11, 30, 3, 4);  
+    // forEachWithIndex
+    XList<Integer> lmod = XList.of(1,2,8, 10, 11, 30, 3, 4);
     lmod.forEachWithIndex( (e, i) -> lmod.set(i, e*2));
     System.out.println(lmod);
     lmod.forEachWithIndex( (e, i) -> { if (i % 2 == 0) lmod.remove(e); } );
     System.out.println(lmod);
     lmod.forEachWithIndex( (e, i) -> { if (i % 2 == 0) lmod.remove(i); } );
-    System.out.println(lmod); // Pytanie: dlaczego mamy taki efekt?*/
+    System.out.println(lmod); // Pytanie: dlaczego mamy taki efekt?
 
   }
 }
-

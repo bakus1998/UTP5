@@ -1,11 +1,11 @@
 package zad3;
 
 import java.util.*;
+import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class XList<T> extends ArrayList<T>{
-    Collection<T> myCollection;
 
     public XList(){
         super();
@@ -27,9 +27,6 @@ public class XList<T> extends ArrayList<T>{
     public static <T>XList<T> of(Collection<T> myCollection){
         return new XList<>(myCollection);
     }
-
-
-
 
     public static <T>XList<T> charsOf(String s){
         char[] arr = s.toCharArray();
@@ -61,7 +58,7 @@ public class XList<T> extends ArrayList<T>{
 
 
     public <T>XList<T> union (T ... t){
-        XList myList =  this;
+        XList<T> myList =  new XList(this);
         myList.addAll(Arrays.asList(t));
         return myList;
 
@@ -74,13 +71,12 @@ public class XList<T> extends ArrayList<T>{
 
     }
 
-    public <T>XList<T> diff(Collection<T> myCollection){
-        XList myList =  this;
-        myCollection.removeAll(this);
+    public XList<T> diff(Collection<T> myCollection){
+        XList<T> myList =  new XList<>(this);
+        myList.removeAll(myCollection);
         return myList;
 
     }
-
 
     public <T>XList<T> unique() {
         List myList =  this;
@@ -114,12 +110,11 @@ public class XList<T> extends ArrayList<T>{
     }
 
 
-
-
-
-
-
-
+    public void forEachWithIndex(BiConsumer<T,Integer> b) {
+        for (int i = 0; i < this.size(); i++) {
+            b.accept(this.get(i), i);
+        }
+    }
 
 
 
