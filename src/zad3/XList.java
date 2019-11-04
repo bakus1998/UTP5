@@ -119,37 +119,34 @@ public class XList<T> extends ArrayList<T>{
 
 
 
-    public XList<T> combine(){
-        List myList = this;
-        List<Object> objList = new ArrayList<>();
-
-        //System.out.println("Size: "+ tokensOfString(myList.get(1).toString()));
-        //System.out.println("FOR: ");
-
-        for(int j=0;j<this.size();j++) {
-            char[] cArray =myList.get(j).toString().toCharArray();
-            List l = new ArrayList();
-            for (int i = 0; i < cArray.length; i++) {
-                if (cArray[i] != 91 && cArray[i] != ']' && cArray[i] != ' ' && cArray[i] != ',') {
-                    //System.out.println(cArray[i]);
-                    l.add(cArray[i]);
-                }
-            }
-            objList.add(l);
+    public <Y> XList<XList<Y>> combine() {
+        ArrayList<Integer> sizes = new ArrayList<>();
+        sizes.add(1);
+        for(int i=0; i<this.size(); i++) {
+            sizes.add(sizes.get(i)*((List<Y>)this.get(i)).size());
         }
-        //System.out.println(objList.get(0));
-
-/*        List testt = new ArrayList();
-        testt.add(myList.get(0));
-
-        List<String> signsToDelete = Arrays.asList("[" , "]" , " " , ",");
-        signsToDelete.removeAll(myList);
-
-
-        System.out.println("TEST: ");
-        System.out.println(testt);*/
-
-        return this;
+        ArrayList<XList<Y>> al = new ArrayList<XList<Y>>();
+        for(int i=0; i<sizes.get(sizes.size()-1); i++) {
+            al.add(new XList<Y>());
+        }
+        System.out.println("AL: " + al);
+        for(int i=0; i<this.size(); i++) {
+            int counter = 0;
+            int index = 0;
+            for(int j=0; j<al.size(); j++) {
+                if(counter>=sizes.get(i)) {
+                    counter = 0;
+                    index++;
+                }
+                al.get(j).add(((List<Y>)this.get(i)).get(index%((List<Y>)this.get(i)).size()));
+                counter++;
+                System.out.println("I: " + i + ", J: " + j +", counter= " + counter + ", index: " + index);
+                System.out.println(al);
+                System.out.println("Index: " + index + " size: " + ((List<Y>)this.get(i)).size()+ ", %:" + index%((List<Y>)this.get(i)).size() + "\n");
+            }
+        }
+        XList<XList<Y>> x = new XList<XList<Y>>(al);
+        return x;
     }
 
 /*

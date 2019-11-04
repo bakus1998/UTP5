@@ -61,7 +61,6 @@ public class Main {
     // Widzieliśmy metode union
     // Teraz metoda diff(dowolna kolekcja)
     System.out.println(m3.diff(set));  // wszystko z m3, co nie jest w set
-
     System.out.println(XList.of(set).diff(m3)); // co jest w set, czego nie ma w m3
 
     // Metoda unique -zwraca nową Xlist bez duplikatow
