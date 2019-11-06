@@ -120,11 +120,64 @@ public class XList<T> extends ArrayList<T>{
 
 
     public <Y> XList<XList<Y>> combine() {
+
+        List myList = this;
+        List<Object> objList = new ArrayList<>();
+        List<Integer> lenghts = new ArrayList<>();
+        List vals = new ArrayList<>();
+
+        //System.out.println("Size: "+ tokensOfString(myList.get(1).toString()));
+        //System.out.println("FOR: ");
+        int counter_whole_size = 0;
+
+        for(int j=0;j<this.size();j++) {
+            char[] cArray =myList.get(j).toString().toCharArray();
+            List l = new ArrayList();
+            for (int i = 0; i < cArray.length; i++) {
+                if (cArray[i] != 91 && cArray[i] != ']' && cArray[i] != ' ' && cArray[i] != ',') {
+                    //System.out.println(cArray[i]);
+                    counter_whole_size++;
+                    l.add(cArray[i]);
+                    vals.add(cArray[i]);
+                }
+            }
+            lenghts.add(l.size());
+            objList.add(l);
+        }
+
+        for(int i=0;i<lenghts.size();i++){
+            if(i==0){
+             counter_whole_size=lenghts.get(i);
+            }else{
+                counter_whole_size*=lenghts.get(i);
+            }
+        }
+
+        System.out.println("TO SIE OBLICZA: " + counter_whole_size);
+        System.out.println("Lengths: " + lenghts + ", all size: " + counter_whole_size);
+        System.out.println("Vals: " + vals);
+
+
         ArrayList<Integer> sizes = new ArrayList<>();
         sizes.add(1);
         for(int i=0; i<this.size(); i++) {
             sizes.add(sizes.get(i)*((List<Y>)this.get(i)).size());
         }
+        //Zaczynamy od tworzenia arraya który ma wielkosc wszystkich możliwości
+/*        XList myList = this;
+        List comSize = new ArrayList();
+
+        boolean whenStart = false;
+        System.out.println("START!: ");
+        for(int i=0;i<myList.size();i++){
+            System.out.println(this.get(i));
+
+        }*/
+
+
+
+
+
         ArrayList<XList<Y>> al = new ArrayList<XList<Y>>();
         for(int i=0; i<sizes.get(sizes.size()-1); i++) {
             al.add(new XList<Y>());
